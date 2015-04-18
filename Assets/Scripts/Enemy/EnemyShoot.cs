@@ -5,8 +5,7 @@ using System.Collections.Generic;
 public class EnemyShoot : LaserSource 
 {
     public Gradient gradient;
-
-
+    
     public MeshRenderer meshRenderer;
 
     public float shootDistanceFromCenter = 1.2f;
@@ -30,7 +29,6 @@ public class EnemyShoot : LaserSource
         hits = new RaycastHit2D[1];
 
         player = GameObject.FindGameObjectWithTag("Player").transform.parent;
-
 	}
 	
 	// Update is called once per frame
@@ -42,7 +40,12 @@ public class EnemyShoot : LaserSource
         Vector2 start = new Vector2(transform.position.x, transform.position.y);
 
         Vector2 end = new Vector2(player.position.x, player.position.y);
-                
+
+        Vector2 direction = (end - start).normalized;
+        start += direction * shootDistanceFromCenter;
+
+
+
         if ((end - start).magnitude < triggerDistance && canShoot)
         {
 
@@ -51,8 +54,11 @@ public class EnemyShoot : LaserSource
             if (hitCount > 0)
             {
                 Transform hitTransform = hits[0].transform;
-                if (hitTransform != null && hitTransform.parent == player)
+                print(hitTransform.name);
+                if (hitTransform == player)
                 {
+                    print("in range!");
+
                     awareness += awarenessDeltaIncrease * Time.deltaTime;
                 }
             }
@@ -78,7 +84,7 @@ public class EnemyShoot : LaserSource
         awareness = 0;
 
         Vector2 direction = (playerPos - enemyPos).normalized;
-        Vector2 beamStartPos = enemyPos + direction * shootDistanceFromCenter;
+        Vector2 beamStartPos = enemyPos;
 
         LaserManager.instance.AddBeam(beamStartPos, direction, this);
               
