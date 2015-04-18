@@ -17,13 +17,14 @@ public class LaserManager : MonoBehaviour
     public string bounceTag = "BouncesLasers";
     public string killTag = "DestroyedByLasers";
     public float hitPadding = 0.01f;
-    
+
+    public static LaserManager instance;
 
     void Awake()
     {
         hits = new RaycastHit2D[hitsCount];
 
-
+        instance = this;
     }
 
 	// Update is called once per frame
@@ -49,7 +50,10 @@ public class LaserManager : MonoBehaviour
 
             if (!beam.bounced)
             {
-                speed = laserStartSpeedStart;
+                if (beamLength < laserLength)
+                    speed = laserStartSpeedStart;
+                else
+                    speed = laserStartSpeedEnd;
             }
             else if (beamLength > laserLength)
             {
