@@ -462,7 +462,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 2
   m_AngularDrag: .0500000007
-  m_GravityScale: 1.5
+  m_GravityScale: 1.70000005
   m_FixedAngle: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -492,7 +492,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7da2a87f48e74624b8316c942e2d6423, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpForce: .5
+  jumpForce: .699999988
   forceMode: 1
   particleSystem: {fileID: 2130137344}
   emissionRatePerThrust: 200
@@ -510,6 +510,10 @@ MonoBehaviour:
   direction: {x: 0, y: 0, z: 0}
   aimPivot: {fileID: 1221645554}
   aimCamera: {fileID: 962641308}
+  viewCamera: {fileID: 287732947}
+  viewInterpolation: .5
+  viewMaxDistanceOffset: 5
+  interpolationTime: .5
 --- !u!1 &728208377
 GameObject:
   m_ObjectHideFlags: 0
