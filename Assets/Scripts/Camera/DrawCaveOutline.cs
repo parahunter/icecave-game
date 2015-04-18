@@ -10,13 +10,13 @@ public class DrawCaveOutline : MonoBehaviour
 
     public void OnPostRender()
     {
-
         List<Vector3> outline3D = levelGenerator.outline3D;
 
         caveLineMaterial.SetPass(0);
 
         GL.PushMatrix();
-        GL.LoadProjectionMatrix(Camera.main.projectionMatrix);
+        Matrix4x4 projection = GL.GetGPUProjectionMatrix(Camera.main.projectionMatrix, false);
+        GL.LoadProjectionMatrix(projection);
         GL.Begin(GL.LINES);
 
         for (int i = 0; i < outline3D.Count; i++)

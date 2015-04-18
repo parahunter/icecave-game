@@ -31,8 +31,10 @@ public class LevelGenerator : MonoBehaviour
         GenerateControlPoints();
         GenerateOutline();
 
-        edgeCollider.points = outline.ToArray();
+        List<Vector2> colliderPoints = outline;
+        colliderPoints.Add(colliderPoints[0]);
 
+        edgeCollider.points = colliderPoints.ToArray();
     }
 	
     void OnDrawGizmos()
