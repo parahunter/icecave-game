@@ -6,5 +6,8 @@ public class LaserBeam
 {
     public List<LaserSegment> segments = new List<LaserSegment>();
 
-
+    public Color color;
+    public int bounces = 0;
+    public LaserSource source;
+    
 }

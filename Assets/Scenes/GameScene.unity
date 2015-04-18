@@ -314,6 +314,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelGenerator: {fileID: 1060810550}
   caveLineMaterial: {fileID: 2100000, guid: b1b0397a67118064383909cc5c805620, type: 2}
+  playerLaserMaterial: {fileID: 2100000, guid: 6b0696acf5e0d0e459960765e5b9e559, type: 2}
+  laserManager: {fileID: 2002827903}
 --- !u!1 &525752549
 GameObject:
   m_ObjectHideFlags: 0
@@ -507,6 +509,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbd2506f1dbb2ea4189ec72fb0e17287, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  color: {r: 1, g: 1, b: 1, a: 1}
   direction: {x: 0, y: 0, z: 0}
   aimPivot: {fileID: 1221645554}
   aimCamera: {fileID: 962641308}
@@ -514,6 +517,8 @@ MonoBehaviour:
   viewInterpolation: .5
   viewMaxDistanceOffset: 5
   interpolationTime: .5
+  laserManager: {fileID: 2002827903}
+  spawnPoint: {fileID: 812516511}
 --- !u!1 &728208377
 GameObject:
   m_ObjectHideFlags: 0
@@ -587,6 +592,33 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
+--- !u!1 &812516510
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 812516511}
+  m_Layer: 0
+  m_Name: laserSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &812516511
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 812516510}
+  m_LocalRotation: {x: -2.0138653e-09, y: .707107008, z: 2.30469173e-08, w: .70710659}
+  m_LocalPosition: {x: -.279994607, y: 5.67395603e-07, z: 2.94995904}
+  m_LocalScale: {x: 1.22979629, y: 3.45464253, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1311552378}
+  m_RootOrder: 0
 --- !u!1 &962641303
 GameObject:
   m_ObjectHideFlags: 0
@@ -795,7 +827,8 @@ Transform:
   m_LocalRotation: {x: -7.17415283e-09, y: -.707106948, z: 3.06722434e-08, w: .70710659}
   m_LocalPosition: {x: 2.95000005, y: 0, z: .352999985}
   m_LocalScale: {x: 1, y: .271411717, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 812516511}
   m_Father: {fileID: 1221645554}
   m_RootOrder: 0
 --- !u!23 &1311552379
@@ -941,6 +974,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1527ea53e561a2f4ba77e4048b72179c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  laserLength: 2
 --- !u!1 &2130137341
 GameObject:
   m_ObjectHideFlags: 0

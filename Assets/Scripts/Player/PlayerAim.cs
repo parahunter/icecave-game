@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class PlayerAim : MonoBehaviour 
+public class PlayerAim : LaserSource 
 {
     public Vector3 direction;
 
@@ -16,22 +16,24 @@ public class PlayerAim : MonoBehaviour
 
     public float interpolationTime = 0.3f;
     Vector3 interpolationVelocity;
-    
+
+    public LaserManager laserManager;
+
+    public Transform spawnPoint;
+
 	// Update is called once per frame
 	void Update () 
     {
-        Vector3 aimPos = aimCamera.ScreenToWorldPoint(Input.mousePosition);
 
+        //aiming
+        Vector3 aimPos = aimCamera.ScreenToWorldPoint(Input.mousePosition);
         direction = aimPos - transform.position;
         direction.z = 0;
-        
         Vector3 normal = new Vector3(-direction.y, direction.x, 0);
-
         aimPivot.rotation = Quaternion.LookRotation(direction, normal);
+        
 
-
-
-
+        //nice camera movement
         Vector3 offset = (aimPos - transform.position);
         offset = Vector3.ClampMagnitude(offset, viewMaxDistanceOffset);
         
@@ -44,5 +46,17 @@ public class PlayerAim : MonoBehaviour
         Vector3 interPolatedPosition = Vector3.SmoothDamp(viewCamera.transform.localPosition, localCameraPos, ref interpolationVelocity, interpolationTime);
 
         viewCamera.transform.localPosition = interPolatedPosition;
+
+
+        //shooting
+        if(Input.GetButtonDown("Fire1"))
+        {
+            
+
+            laserManager.AddBeam(spawnPoint.position, spawnPoint.forward, this);
+
+
+        }
+
 	}
 }
