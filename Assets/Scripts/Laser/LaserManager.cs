@@ -12,6 +12,7 @@ public class LaserManager : MonoBehaviour
     RaycastHit2D[] hits;
     public int hitsCount = 5;
     public string bounceTag = "BouncesLasers";
+    public string killTag = "DestroyedByLasers";
     public float hitPadding = 0.01f;
     
 
@@ -58,9 +59,8 @@ public class LaserManager : MonoBehaviour
             //beam.segments[0] = startSegment;
             //beam.segments[beam.segments.Count - 1] = endSegment;
 
-            //see if beam should bounce
+            //see if beam should bounce on walls or objects
             int hitResultCount = Physics2D.LinecastNonAlloc (endSegment.start, endSegment.end, hits );
-            
             for(int i = 0 ; i < hitResultCount ; i++)
             {
                 RaycastHit2D hit = hits[i];
@@ -84,6 +84,21 @@ public class LaserManager : MonoBehaviour
                     beam.segments.Add(bouncedSegment);
 
                     break;
+                }
+            }
+
+            //hit detection
+            foreach(LaserSegment segment in beam.segments)
+            {
+                hitResultCount = Physics2D.LinecastNonAlloc (endSegment.start, endSegment.end, hits );
+            
+                for(int i = 0 ; i < hitResultCount ; i++)
+                {
+                    RaycastHit2D hit = hits[i];
+                    if (hit.transform.CompareTag(killTag))
+                    {
+                        hit.transform.SendMessageUpwards("OnLaserHit", SendMessageOptions.DontRequireReceiver);
+                    }
                 }
             }
 

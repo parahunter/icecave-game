@@ -430,9 +430,10 @@ GameObject:
   - 114: {fileID: 538024427}
   - 114: {fileID: 538024428}
   - 114: {fileID: 538024429}
+  - 114: {fileID: 538024430}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: DestroyedByLasers
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -519,6 +520,19 @@ MonoBehaviour:
   interpolationTime: .5
   laserManager: {fileID: 2002827903}
   spawnPoint: {fileID: 812516511}
+--- !u!114 &538024430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 538024424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0ed84ab4489dcc4eb59ea5df2e61f48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainCamera: {fileID: 287732947}
+  gameManager: {fileID: 2038151943}
 --- !u!1 &728208377
 GameObject:
   m_ObjectHideFlags: 0
@@ -885,9 +899,10 @@ GameObject:
   - 33: {fileID: 1668021993}
   - 23: {fileID: 1668021992}
   - 61: {fileID: 1668021991}
+  - 50: {fileID: 1668021995}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: DestroyedByLasers
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -948,6 +963,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
+--- !u!50 &1668021995
+Rigidbody2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1668021990}
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: .0500000007
+  m_GravityScale: 1
+  m_FixedAngle: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
 --- !u!1 &1683399285
 GameObject:
   m_ObjectHideFlags: 0
@@ -1052,7 +1082,48 @@ MonoBehaviour:
   laserSpeed: 10
   hitsCount: 5
   bounceTag: BouncesLasers
+  killTag: DestroyedByLasers
   hitPadding: .00999999978
+--- !u!1 &2038151942
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 2038151944}
+  - 114: {fileID: 2038151943}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2038151943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2038151942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 175d41128f073054caf8982cbf99b530, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waitTime: 1
+--- !u!4 &2038151944
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2038151942}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .352999628, y: .430000007, z: -2.94999981}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
 --- !u!1 &2130137341
 GameObject:
   m_ObjectHideFlags: 0
