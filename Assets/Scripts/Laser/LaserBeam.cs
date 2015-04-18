@@ -9,5 +9,6 @@ public class LaserBeam
     public Color color;
     public int bounces = 0;
     public LaserSource source;
-    
+    public bool bounced = false;
+
 }

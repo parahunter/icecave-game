@@ -8,6 +8,9 @@ public class LaserManager : MonoBehaviour
 
     public float laserLength = 1;
     public float laserSpeed = 3;
+    public float laserStartSpeedStart = 5f;
+    public float laserStartSpeedEnd = 7f;
+
 
     RaycastHit2D[] hits;
     public int hitsCount = 5;
@@ -26,33 +29,46 @@ public class LaserManager : MonoBehaviour
 	// Update is called once per frame
 	void FixedUpdate () 
     {
-
-
-	    foreach(LaserBeam beam in beams)
+        foreach(LaserBeam beam in beams)
         {
             bool removeStartSegment = false;
+
+
 
             //move beams
             LaserSegment startSegment= beam.segments[0];
             LaserSegment endSegment = beam.segments[beam.segments.Count - 1];
 
-            endSegment.end += endSegment.direction * laserSpeed * Time.fixedDeltaTime;
-            
-            if (startSegment != endSegment || (endSegment.end - endSegment.start).magnitude > laserLength)
-            {
-                Vector2 delta = startSegment.direction * laserSpeed * Time.fixedDeltaTime;
-                Vector2 proxy = startSegment.start + delta;
-                
-                Vector2 proxyToEnd = startSegment.end - proxy;
+            float speed = beam.bounced ? laserSpeed : laserStartSpeedEnd;
 
-                if (Vector2.Dot(startSegment.direction, proxyToEnd) < 0.5f)
-                {
-              //      Debug.DrawLine()
-                    removeStartSegment = true;
-                }
-                else
-                    startSegment.start += delta;
+            endSegment.end += endSegment.direction * speed * Time.fixedDeltaTime;
+
+            float beamLength = 0;
+            foreach (LaserSegment segment in beam.segments)
+                beamLength += segment.length;
+
+            if (!beam.bounced)
+            {
+                speed = laserStartSpeedStart;
             }
+            else if (beamLength > laserLength)
+            {
+                speed = laserSpeed;
+            }
+            else if (startSegment != endSegment)
+                speed = laserSpeed;
+
+            Vector2 delta = startSegment.direction * speed * Time.fixedDeltaTime;
+            Vector2 proxy = startSegment.start + delta;
+
+            Vector2 proxyToEnd = (startSegment.end - proxy).normalized;
+
+            if (Vector2.Dot(startSegment.direction, proxyToEnd) < 0.5f)
+            {
+                removeStartSegment = true;
+            }
+            else
+                startSegment.start += delta;
 
 
             
@@ -66,6 +82,7 @@ public class LaserManager : MonoBehaviour
                 RaycastHit2D hit = hits[i];
                 if(hit.transform.CompareTag(bounceTag))
                 {
+                    beam.bounced = true;
                   //  Debug.Break();
                     
                     //clamp segment to wall
@@ -113,6 +130,7 @@ public class LaserManager : MonoBehaviour
 
         beam.segments.Add(new LaserSegment(position, direction));
         beam.source = source;
+        beam.bounced = false;
 
         beams.Add(beam);
     }
