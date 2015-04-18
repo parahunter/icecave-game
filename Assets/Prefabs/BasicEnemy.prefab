@@ -205,7 +205,7 @@ MonoBehaviour:
     m_NumColorKeys: 4
     m_NumAlphaKeys: 2
   meshRenderer: {fileID: 2373018}
-  shootDistanceFromCenter: 1.20000005
+  shootDistanceFromCenter: .649999976
   triggerDistance: 15
   awarenessDeltaIncrease: .5
   awarenessDeltaDecrease: 2
