@@ -20,13 +20,15 @@ public class PlayerAim : LaserSource
     public LaserManager laserManager;
 
     public Transform spawnPoint;
+    public AudioSource shootSound;
+
+    public Vector3 aimPos;
 
 	// Update is called once per frame
 	void Update () 
     {
-
         //aiming
-        Vector3 aimPos = aimCamera.ScreenToWorldPoint(Input.mousePosition);
+        aimPos = aimCamera.ScreenToWorldPoint(Input.mousePosition);
         direction = aimPos - transform.position;
         direction.z = 0;
         Vector3 normal = new Vector3(-direction.y, direction.x, 0);
@@ -47,13 +49,13 @@ public class PlayerAim : LaserSource
 
         viewCamera.transform.localPosition = interPolatedPosition;
 
-
         //shooting
         if(Input.GetButtonDown("Fire1"))
         {
-            
 
+            
             laserManager.AddBeam(spawnPoint.position, spawnPoint.forward, this);
+            shootSound.Play();
 
 
         }

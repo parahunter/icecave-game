@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: CaveLineMaterial
-  m_Shader: {fileID: 200, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 203, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
   m_CustomRenderQueue: -1
@@ -150,4 +150,4 @@ Material:
       data:
         first:
           name: _TintColor
-        second: {r: .908886135, g: .897761643, b: .992647052, a: 1}
+        second: {r: .306444645, g: .69786042, b: .801470578, a: 1}

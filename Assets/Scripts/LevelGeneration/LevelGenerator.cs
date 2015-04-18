@@ -10,6 +10,8 @@ public class LevelGenerator : MonoBehaviour
     public List<Vector2> outline = new List<Vector2>();
     public List<Vector3> outline3D = new List<Vector3>();
 
+    public Transform basicEnemyPrefab;
+
     public int minControlPoints = 4;
     public int maxControlPoints = 7;
 
@@ -27,6 +29,10 @@ public class LevelGenerator : MonoBehaviour
 
     public Goal goal;
 
+    public float minSpawnDistanceToPlayer = 12f;
+
+    public float enemySpawnProbability = 0.4f;
+
     void Awake()
     {
         Random.seed = seed;
@@ -38,6 +44,8 @@ public class LevelGenerator : MonoBehaviour
 
         edgeCollider.points = colliderPoints.ToArray();
         goal.transform.position = controlPoints[controlPoints.Count - 1];
+
+        GenerateEnemies();
     }
 	
     void OnDrawGizmos()
@@ -123,7 +131,30 @@ public class LevelGenerator : MonoBehaviour
         {
             outline3D.Add(new Vector3(point.x, point.y, 0));
         }
-
     }
 
+    void GenerateEnemies()
+    {
+        
+        for(int i = 0 ; i < outline.Count - 2 ; i++)
+        {
+            if (Random.Range(0, 1f) > enemySpawnProbability)
+                continue;
+
+            Vector2 startPoint = outline[i];
+            Vector2 endPoint = outline[i + 1];
+
+            //player always starts at origo so make sure enemies are further back
+            if(startPoint.magnitude > minSpawnDistanceToPlayer && endPoint.magnitude > minSpawnDistanceToPlayer)
+            {
+                Vector2 direction = (endPoint - startPoint);
+
+                Vector2 spawnPoint = startPoint + direction * Random.Range(0, 0.5f);
+
+                Instantiate(basicEnemyPrefab, new Vector3(spawnPoint.x, spawnPoint.y, 0), Quaternion.identity);
+            }
+
+        }
+
+    }
 }

@@ -54,11 +54,8 @@ public class EnemyShoot : LaserSource
             if (hitCount > 0)
             {
                 Transform hitTransform = hits[0].transform;
-                print(hitTransform.name);
                 if (hitTransform == player)
                 {
-                    print("in range!");
-
                     awareness += awarenessDeltaIncrease * Time.deltaTime;
                 }
             }
