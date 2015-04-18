@@ -72,7 +72,7 @@ public class EnemyShoot : LaserSource
             Shoot(start, end);
         }
 
-        meshRenderer.material.color = gradient.Evaluate(awareness);
+        meshRenderer.material.SetColor("_TintColor", gradient.Evaluate(awareness));
 	}
 
     void Shoot(Vector2 enemyPos, Vector2 playerPos)
