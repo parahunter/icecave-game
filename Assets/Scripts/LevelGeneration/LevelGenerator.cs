@@ -6,8 +6,9 @@ public class LevelGenerator : MonoBehaviour
 {
     public int seed = 0;
 
-    List<Vector2> controlPoints = new List<Vector2>();
-    List<Vector2> outline = new List<Vector2>();
+    public List<Vector2> controlPoints = new List<Vector2>();
+    public List<Vector2> outline = new List<Vector2>();
+    public List<Vector3> outline3D = new List<Vector3>();
 
     public int minControlPoints = 4;
     public int maxControlPoints = 7;
@@ -113,10 +114,11 @@ public class LevelGenerator : MonoBehaviour
             }
         }
  
+        foreach(Vector2 point in outline)
+        {
+            outline3D.Add(new Vector3(point.x, point.y, 0));
+        }
+
     }
 
-    void OnPostRenderer()
-    {
-
-    }
 }
