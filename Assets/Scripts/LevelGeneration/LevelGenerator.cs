@@ -25,6 +25,8 @@ public class LevelGenerator : MonoBehaviour
 
     public EdgeCollider2D edgeCollider;
 
+    public Goal goal;
+
     void Awake()
     {
         Random.seed = seed;
@@ -35,6 +37,7 @@ public class LevelGenerator : MonoBehaviour
         colliderPoints.Add(colliderPoints[0]);
 
         edgeCollider.points = colliderPoints.ToArray();
+        goal.transform.position = controlPoints[controlPoints.Count - 1];
     }
 	
     void OnDrawGizmos()

@@ -66,7 +66,6 @@ public class LaserManager : MonoBehaviour
                 RaycastHit2D hit = hits[i];
                 if(hit.transform.CompareTag(bounceTag))
                 {
-                    print("bounces");
                   //  Debug.Break();
                     
                     //clamp segment to wall
