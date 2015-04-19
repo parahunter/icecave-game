@@ -235,7 +235,6 @@ public class LevelGenerator : GLSupplier
         {
             outline3D.Add(vec.ToVec3());
         }
-
     }
 
     void GenerateEnemies()
@@ -261,9 +260,7 @@ public class LevelGenerator : GLSupplier
             {
                 Instantiate(basicEnemyPrefab, new Vector3(spawnPoint.x, spawnPoint.y, 0), Quaternion.identity);
             }
-
         }
-
     }
 
     public override void Draw()

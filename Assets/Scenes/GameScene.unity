@@ -2354,8 +2354,8 @@ MonoBehaviour:
       inSlope: .0148952426
       outSlope: .0148952426
       tangentMode: 0
-    - time: 2.75444102
-      value: .108482651
+    - time: .944965839
+      value: .0948302448
       inSlope: .0292807817
       outSlope: .0292807817
       tangentMode: 0
@@ -2384,25 +2384,30 @@ MonoBehaviour:
   enemySpawnChance:
     serializedVersion: 2
     m_Curve:
-    - time: 1.35299921
-      value: .0757726654
-      inSlope: .0213010088
-      outSlope: .0213010088
+    - time: .116826057
+      value: .000955276191
+      inSlope: .0416971967
+      outSlope: .0416971967
       tangentMode: 10
-    - time: 18.6147499
-      value: .443465382
-      inSlope: .0168988016
-      outSlope: .0168988016
+    - time: 7.26866579
+      value: .299166948
+      inSlope: .0255668797
+      outSlope: .0255668797
       tangentMode: 10
-    - time: 44.5073738
-      value: .767035007
-      inSlope: .00771757495
-      outSlope: .00771757495
+    - time: 29.2916336
+      value: .506988049
+      inSlope: .0131464079
+      outSlope: .0131464079
       tangentMode: 10
-    - time: 100.246841
-      value: .930828512
-      inSlope: .00293855532
-      outSlope: .00293855532
+    - time: 45.1023254
+      value: .773497105
+      inSlope: .0103407269
+      outSlope: .0103407269
+      tangentMode: 10
+    - time: 101.436745
+      value: .988987446
+      inSlope: .00382519863
+      outSlope: .00382519863
       tangentMode: 10
     m_PreInfinity: 2
     m_PostInfinity: 2
