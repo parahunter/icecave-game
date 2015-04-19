@@ -19,7 +19,14 @@ public class IntroScreen : MonoBehaviour
     {
         if(Input.GetButtonDown("Fire1"))
         {
-            Screen.fullScreen = true;
+         //   Screen.fullScreen = true;
+
+            GameObject obj = new GameObject("NewGameMessage");
+            obj.tag = "NewGameMessage";
+            DontDestroyOnLoad(obj);
+            NewGameMessage message = obj.AddComponent<NewGameMessage>();
+            
+
             Application.LoadLevel("GameScene");
         }
     }

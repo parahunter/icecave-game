@@ -6,6 +6,9 @@ TagManager:
   tags:
   - BouncesLasers
   - DestroyedByLasers
+  - NewGameMessage
+  - CompletedLevelMessage
+  - GameOverMessage
   layers:
   - Default
   - TransparentFX

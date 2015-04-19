@@ -4,14 +4,14 @@ using System.Collections.Generic;
 
 public class GUICursor : MonoBehaviour 
 {
-    
-    RectTransform rectTransform;
+   
+    public RectTransform rectTransform;
     public PlayerAim playerAim;
 
 	// Use this for initialization
 	void Start () 
     {
-	    rectTransform = GetComponent<RectTransform>();
+	//    rectTransform = GetComponent<RectTransform>();
         Cursor.visible = false;
 	}
 	
@@ -23,6 +23,10 @@ public class GUICursor : MonoBehaviour
             Vector3 mousePos = Camera.main.WorldToScreenPoint(playerAim.aimPos);
 
             rectTransform.position = mousePos;
+        }
+        else
+        {
+            rectTransform.gameObject.SetActive(false);
         }
 
 

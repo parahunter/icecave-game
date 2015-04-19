@@ -207,8 +207,8 @@ MonoBehaviour:
   meshRenderer: {fileID: 2373018}
   shootDistanceFromCenter: .649999976
   triggerDistance: 14
-  awarenessDeltaIncrease: .5
-  awarenessDeltaDecrease: 2
+  awarenessDeltaIncrease: .699999988
+  awarenessDeltaDecrease: 1
   cooldownPeriod: 1
 --- !u!114 &11489996
 MonoBehaviour:
