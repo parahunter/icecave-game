@@ -7,6 +7,9 @@ public class GameManager : MonoBehaviour
     public float waitTime = 1f;
     public Transform player;
 
+    public AudioSource source;
+    public AudioClip keyHit;
+    
     public LevelGenerator levelGenerator;
 
     public int completedCaves = 0;
@@ -74,10 +77,12 @@ public class GameManager : MonoBehaviour
     {
         lockCount++;
 
-        if(lockCount == lockAmount)
+        if (lockCount == lockAmount)
         {
             goal.Open();
         }
+        else
+            source.PlayOneShot(keyHit);
     }
 
 

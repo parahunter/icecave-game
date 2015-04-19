@@ -29,6 +29,7 @@ GameObject:
   - 114: {fileID: 11486948}
   - 114: {fileID: 11489996}
   - 50: {fileID: 5082272}
+  - 82: {fileID: 8284606}
   m_Layer: 0
   m_Name: BasicEnemy
   m_TagString: DestroyedByLasers
@@ -149,6 +150,75 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: .5
+--- !u!82 &8284606
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 135562}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 00a4bac0f0fe62249aeec5fb4097eb37, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
 --- !u!114 &11486948
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -167,7 +237,7 @@ MonoBehaviour:
       rgba: 268435660
     key1:
       serializedVersion: 2
-      rgba: 1006633215
+      rgba: 1342177535
     key2:
       serializedVersion: 2
       rgba: 4294967295
@@ -207,9 +277,10 @@ MonoBehaviour:
   meshRenderer: {fileID: 2373018}
   shootDistanceFromCenter: .649999976
   triggerDistance: 14
-  awarenessDeltaIncrease: .699999988
-  awarenessDeltaDecrease: 1
+  awarenessDeltaIncrease: 1
+  awarenessDeltaDecrease: 1.5
   cooldownPeriod: 1
+  shootSource: {fileID: 8284606}
 --- !u!114 &11489996
 MonoBehaviour:
   m_ObjectHideFlags: 1

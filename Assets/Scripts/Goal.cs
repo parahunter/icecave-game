@@ -21,12 +21,13 @@ public class Goal : GLSupplier
     Vector3 cross2;
     Vector3 cross3;
 
+    AudioSource source;
 
     void Start()
     {
         col.isTrigger = false;
         particles.enableEmission = false;
-        
+        source = GetComponent<AudioSource>();
         
         Vector3 offset;
         float radius = col.radius;
@@ -57,6 +58,7 @@ public class Goal : GLSupplier
         col.isTrigger = true;
         opened = true;
         particles.enableEmission = true;
+        source.Play();
     }
 
 

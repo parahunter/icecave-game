@@ -22,7 +22,8 @@ public class EnemyShoot : LaserSource
     bool canShoot = true;
     public float cooldownPeriod = 1f;
 
-    
+    public AudioSource shootSource;
+
     // Use this for initialization
 	void Start () 
     {
@@ -79,6 +80,7 @@ public class EnemyShoot : LaserSource
     {
         canShoot = false;
         awareness = 0;
+        shootSource.Play();
 
         Vector2 direction = (playerPos - enemyPos).normalized;
         Vector2 beamStartPos = enemyPos;
