@@ -7,7 +7,6 @@ public class EnemyDeath : MonoBehaviour
 
     public void OnLaserHit()
     {
-
         Destroy(gameObject);
     }
 }
