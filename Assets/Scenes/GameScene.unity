@@ -3344,11 +3344,27 @@ MonoBehaviour:
   player: {fileID: 538024425}
   source: {fileID: 2038151945}
   keyHit: {fileID: 8300000, guid: 2df683486f374c7448547fb82db863a5, type: 3}
+  levelComplete: {fileID: 8300000, guid: a4fa0291f49199d4eaa7502ecd23653e, type: 3}
   levelGenerator: {fileID: 1060810550}
   completedCaves: 0
   lockCount: 0
   lockAmount: 3
   goal: {fileID: 1752283950}
+  playerWinScaling:
+    serializedVersion: 2
+    m_Curve:
+    - time: -.00418424187
+      value: .999999821
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: .995523214
+      value: 3.92794609e-05
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
 --- !u!4 &2038151944
 Transform:
   m_ObjectHideFlags: 0

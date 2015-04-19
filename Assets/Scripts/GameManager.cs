@@ -9,7 +9,8 @@ public class GameManager : MonoBehaviour
 
     public AudioSource source;
     public AudioClip keyHit;
-    
+    public AudioClip levelComplete;
+
     public LevelGenerator levelGenerator;
 
     public int completedCaves = 0;
@@ -19,6 +20,8 @@ public class GameManager : MonoBehaviour
     public int lockCount = 0;
     public int lockAmount = 3;
     public Goal goal;
+
+    public AnimationCurve playerWinScaling;
 
     void Awake()
     {
@@ -64,6 +67,7 @@ public class GameManager : MonoBehaviour
         player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         player.GetComponent<PlayerJumping>().enabled = false;
         player.Find("Collider").gameObject.SetActive(false);
+        source.PlayOneShot(levelComplete);
 
         StartCoroutine(AnimateCompleteLevel());
     }
@@ -102,7 +106,24 @@ public class GameManager : MonoBehaviour
 
     IEnumerator AnimateCompleteLevel()
     {
-        yield return new WaitForSeconds(waitTime);
+        float t = 0;
+        
+        float lastTime = playerWinScaling.keys[playerWinScaling.length - 1].time;
+        Vector3 startPos = player.transform.position;
+        Vector3 startScale = player.transform.localScale;
+        while(t < lastTime)
+        {
+            float s = playerWinScaling.Evaluate(t);
+
+            player.localScale = startScale * s;
+            player.transform.position = Vector3.Lerp(startPos, goal.transform.position, t);
+             
+            t += Time.deltaTime;
+            
+            yield return 0;
+        }
+        player.gameObject.SetActive(false);
+
 
         GameObject obj = new GameObject("CompletedLevelMessage");
         obj.tag = "CompletedLevelMessage";
