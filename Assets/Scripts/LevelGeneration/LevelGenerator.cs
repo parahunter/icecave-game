@@ -27,6 +27,8 @@ public class LevelGenerator : GLSupplier
     public EdgeCollider2D edgeCollider;
 
     public Goal goal;
+    public Lock[] locks;
+    public PlayerAim player;
 
     public float minSpawnDistanceToPlayer = 12f;
 
@@ -48,7 +50,27 @@ public class LevelGenerator : GLSupplier
         edgeCollider.points = colliderPoints.ToArray();
         goal.transform.position = controlPoints[controlPoints.Count - 1];
 
+        List<Vector2> placedObjects = new List<Vector2>();
+        
+        player.transform.position = controlPoints[0].ToVec3();
+        placedObjects.Add(controlPoints[0]);
+
+        
+
+
         GenerateEnemies();
+    }
+
+    Vector2 centerOfMass(List<Vector2> list)
+    {
+        Vector2 center = new Vector2();
+
+        foreach (Vector2 vec in list)
+            center += vec;
+
+        center /= list.Count;
+
+        return center;
     }
 	
     void OnDrawGizmos()
