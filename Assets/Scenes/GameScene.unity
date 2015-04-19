@@ -309,13 +309,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 287732943}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10db02869718d2645aaa31582e2861cb, type: 3}
+  m_Script: {fileID: 11500000, guid: 3487732c183027f4381d4190715bc47e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelGenerator: {fileID: 1060810550}
-  caveLineMaterial: {fileID: 2100000, guid: b1b0397a67118064383909cc5c805620, type: 2}
-  playerLaserMaterial: {fileID: 2100000, guid: 6b0696acf5e0d0e459960765e5b9e559, type: 2}
-  laserManager: {fileID: 2002827903}
+  lineSuppliers:
+  - {fileID: 1060810550}
+  - {fileID: 2002827903}
+  lineMaterial: {fileID: 2100000, guid: d8cdbdb1496e5e64e8d935360e2ee0a1, type: 2}
 --- !u!1 &299931737
 GameObject:
   m_ObjectHideFlags: 0
@@ -1747,7 +1747,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbd2506f1dbb2ea4189ec72fb0e17287, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  laserColor: {r: 0, g: 0, b: 0, a: 0}
+  laserColor: {r: .868683755, g: .369647503, b: .948529422, a: 1}
   direction: {x: 0, y: 0, z: 0}
   aimPivot: {fileID: 1221645554}
   aimCamera: {fileID: 962641308}
@@ -1962,6 +1962,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   seed: 1
+  outlineColor: {r: .639705896, g: .821095407, b: 1, a: 1}
   controlPoints: []
   outline: []
   outline3D: []
@@ -1978,7 +1979,7 @@ MonoBehaviour:
   edgeCollider: {fileID: 1060810552}
   goal: {fileID: 1752283950}
   minSpawnDistanceToPlayer: 12
-  enemySpawnProbability: .100000001
+  enemySpawnProbability: .0500000007
 --- !u!4 &1060810551
 Transform:
   m_ObjectHideFlags: 0

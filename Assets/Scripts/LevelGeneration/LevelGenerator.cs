@@ -2,9 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class LevelGenerator : MonoBehaviour 
+public class LevelGenerator : GLSupplier 
 {
     public int seed = 0;
+    public Color outlineColor = Color.white;
 
     public List<Vector2> controlPoints = new List<Vector2>();
     public List<Vector2> outline = new List<Vector2>();
@@ -156,5 +157,22 @@ public class LevelGenerator : MonoBehaviour
 
         }
 
+    }
+
+    public override void Draw()
+    {
+        GL.Begin(GL.LINES);
+        GL.Color(outlineColor);
+
+        //draw level outline
+        for (int i = 0; i < outline3D.Count; i++)
+        {
+            Vector3 point = outline3D[i % outline3D.Count];
+            Vector3 point2 = outline3D[(i + 1) % outline3D.Count];
+
+            GL.Vertex(point);
+            GL.Vertex(point2);
+        }
+        GL.End();
     }
 }

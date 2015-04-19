@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class LaserManager : MonoBehaviour 
+public class LaserManager : GLSupplier 
 {
     public List<LaserBeam> beams = new List<LaserBeam>();
 
@@ -131,7 +131,7 @@ public class LaserManager : MonoBehaviour
     {
 
         LaserBeam beam = new LaserBeam();
-
+        beam.color = source.laserColor;
         beam.segments.Add(new LaserSegment(position, direction));
         beam.source = source;
         beam.bounced = false;
@@ -140,4 +140,19 @@ public class LaserManager : MonoBehaviour
     }
 
 
+
+    public override void Draw()
+    {
+        foreach(LaserBeam beam in beams)
+        {
+            GL.Begin(GL.LINES);
+            GL.Color(beam.color);
+                foreach(LaserSegment segment in beam.segments)
+                {
+                    GL.Vertex(segment.start3D);
+                    GL.Vertex(segment.end3D);
+                }
+            GL.End();
+        }
+    }
 }
