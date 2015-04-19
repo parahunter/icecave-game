@@ -361,6 +361,7 @@ MonoBehaviour:
   lineSuppliers:
   - {fileID: 1060810550}
   - {fileID: 2002827903}
+  - {fileID: 1752283950}
   lineMaterial: {fileID: 2100000, guid: d8cdbdb1496e5e64e8d935360e2ee0a1, type: 2}
 --- !u!1 &292592284
 GameObject:
@@ -666,7 +667,7 @@ ParticleSystem:
         rgba: 4294967295
       minMaxState: 0
     startSize:
-      scalar: .189999998
+      scalar: .330000013
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -752,7 +753,7 @@ ParticleSystem:
     enabled: 1
     m_Type: 0
     rate:
-      scalar: 200
+      scalar: 50
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -869,13 +870,13 @@ ParticleSystem:
       maxGradient:
         key0:
           serializedVersion: 2
-          rgba: 16759516
+          rgba: 1297426
         key1:
           serializedVersion: 2
-          rgba: 4294006434
+          rgba: 2417216530
         key2:
           serializedVersion: 2
-          rgba: 4293802642
+          rgba: 1796459538
         key3:
           serializedVersion: 2
           rgba: 0
@@ -891,23 +892,23 @@ ParticleSystem:
         key7:
           serializedVersion: 2
           rgba: 0
-        ctime0: 0
-        ctime1: 15227
-        ctime2: 36237
+        ctime0: 15227
+        ctime1: 65535
+        ctime2: 65535
         ctime3: 65535
         ctime4: 0
         ctime5: 0
         ctime6: 0
         ctime7: 0
         atime0: 0
-        atime1: 16191
+        atime1: 4048
         atime2: 21395
         atime3: 65535
-        atime4: 0
+        atime4: 65535
         atime5: 0
         atime6: 0
         atime7: 0
-        m_NumColorKeys: 4
+        m_NumColorKeys: 2
         m_NumAlphaKeys: 4
       minGradient:
         key0:
@@ -2331,9 +2332,12 @@ MonoBehaviour:
   maxForks: 7
   minControlPointDistance: 10
   maxControlPointDistance: 15
-  outlineSubdivisions: 3
-  minOutlineOffset: 6
-  maxOutlineOffset: 10
+  minForkDistance: 20
+  maxForkDistance: 25
+  forkRandomRotation: 10
+  outlineSubdivisions: 1
+  minOutlineOffset: 3
+  maxOutlineOffset: 15
   edgeCollider: {fileID: 1060810552}
   goal: {fileID: 1752283950}
   locks:
@@ -2341,11 +2345,65 @@ MonoBehaviour:
   - {fileID: 1281229179}
   - {fileID: 1650624013}
   player: {fileID: 538024429}
-  minSpawnDistanceToPlayer: 12
-  enemySpawnProbability: .0500000007
+  minSpawnDistanceToPlayer: 10
   forkChance:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - time: -.00313863903
+      value: -.0043027997
+      inSlope: .0148952426
+      outSlope: .0148952426
+      tangentMode: 0
+    - time: 2.75444102
+      value: .108482651
+      inSlope: .0292807817
+      outSlope: .0292807817
+      tangentMode: 0
+    - time: 6.92162132
+      value: .187583253
+      inSlope: .0314414501
+      outSlope: .0314414501
+      tangentMode: 0
+    - time: 10.0784101
+      value: .35758841
+      inSlope: .0348687172
+      outSlope: .0348687172
+      tangentMode: 0
+    - time: 16.3314018
+      value: .47894752
+      inSlope: .0274181366
+      outSlope: .0274181366
+      tangentMode: 0
+    - time: 24.1231995
+      value: .723825753
+      inSlope: .0200731698
+      outSlope: .0200731698
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  enemySpawnChance:
+    serializedVersion: 2
+    m_Curve:
+    - time: 1.35299921
+      value: .0757726654
+      inSlope: .0213010088
+      outSlope: .0213010088
+      tangentMode: 10
+    - time: 18.6147499
+      value: .443465382
+      inSlope: .0168988016
+      outSlope: .0168988016
+      tangentMode: 10
+    - time: 44.5073738
+      value: .767035007
+      inSlope: .00771757495
+      outSlope: .00771757495
+      tangentMode: 10
+    - time: 100.246841
+      value: .930828512
+      inSlope: .00293855532
+      outSlope: .00293855532
+      tangentMode: 10
     m_PreInfinity: 2
     m_PostInfinity: 2
 --- !u!4 &1060810551
@@ -3097,6 +3155,8 @@ MonoBehaviour:
   player: {fileID: 538024425}
   gameManager: {fileID: 2038151943}
   col: {fileID: 1752283952}
+  subdivissions: 30
+  color: {r: .0707180128, g: .801470578, b: .0757576451, a: 1}
   particles: {fileID: 299931740}
 --- !u!4 &1752283951
 Transform:
@@ -3123,7 +3183,7 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: .5
+  m_Radius: 1
 --- !u!1 &2002827901
 GameObject:
   m_ObjectHideFlags: 0

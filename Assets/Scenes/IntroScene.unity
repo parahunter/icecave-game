@@ -133,7 +133,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: .208910033, g: .578609049, b: .676470578, a: 1}
+  m_Color: {r: .875, g: .411764681, b: .862221181, a: 1}
   m_FontData:
     m_Font: {fileID: 12800000, guid: e13df3083a961bc48888ef4fd92f14a4, type: 3}
     m_FontSize: 237
@@ -272,7 +272,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: .544117689, g: .904582739, b: 1, a: 1}
+  m_Color: {r: .610294104, g: .242322668, b: .600143254, a: 1}
   m_FontData:
     m_Font: {fileID: 12800000, guid: 1912c891fffe46143b8705d1c846d295, type: 3}
     m_FontSize: 93
@@ -323,7 +323,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: .647058845, g: .926977754, b: 1, a: 1}
+  m_Color: {r: .875, g: .411764681, b: .862221181, a: 1}
   m_FontData:
     m_Font: {fileID: 12800000, guid: 97e3df1c60c48ee48b9df471a9f4cd97, type: 3}
     m_FontSize: 152
@@ -568,7 +568,7 @@ GameObject:
   - 222: {fileID: 809267592}
   - 114: {fileID: 809267591}
   m_Layer: 5
-  m_Name: Icecave
+  m_Name: Info
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -586,7 +586,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: .647058845, g: .926977754, b: 1, a: 1}
+  m_Color: {r: .875, g: .411764681, b: .862221181, a: 1}
   m_FontData:
     m_Font: {fileID: 12800000, guid: 97e3df1c60c48ee48b9df471a9f4cd97, type: 3}
     m_FontSize: 113
@@ -669,7 +669,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: .544117689, g: .904582739, b: 1, a: 1}
+  m_Color: {r: .610294104, g: .242322668, b: .600143254, a: 1}
   m_FontData:
     m_Font: {fileID: 12800000, guid: 1912c891fffe46143b8705d1c846d295, type: 3}
     m_FontSize: 143

@@ -19,6 +19,9 @@ public class LevelGenerator : GLSupplier
     public float minControlPointDistance = 10;
     public float maxControlPointDistance = 10;
 
+    public float minForkDistance = 10f;
+    public float maxForkDistance = 15f;
+    public float forkRandomRotation = 10;
 
     public float outlineSubdivisions = 1.5f;
     public float minOutlineOffset = 2f;
@@ -32,11 +35,11 @@ public class LevelGenerator : GLSupplier
 
     public float minSpawnDistanceToPlayer = 12f;
 
-    public float enemySpawnProbability = 0.4f;
-
+   
     List<Vector2> usedControlPoints = new List<Vector2>();
     
     public AnimationCurve forkChance;
+    public AnimationCurve enemySpawnChance;
 
     void Awake()
     {
@@ -142,6 +145,8 @@ public class LevelGenerator : GLSupplier
     {
         int forkCount = Random.Range(minForks, maxForks);
 
+        float forkProbability = forkChance.Evaluate(GameManager.instance.completedCaves); 
+
         for(int f = 0 ; f < forkCount ; f++)
         {
             float directionOffset = 0;// Random.Range(0, Mathf.PI);
@@ -150,9 +155,18 @@ public class LevelGenerator : GLSupplier
 
             float directionRadians = t * Mathf.PI * 2 + directionOffset;
 
-            Vector2 offset = new Vector2(Mathf.Cos(directionRadians), Mathf.Sin(directionRadians)) * Random.Range(minControlPointDistance, maxControlPointDistance);
+            Vector2 point = new Vector2(Mathf.Cos(directionRadians), Mathf.Sin(directionRadians)) * Random.Range(minControlPointDistance, maxControlPointDistance);
 
-            controlPoints.Add(offset);
+            controlPoints.Add(point);
+
+            if(Random.Range(0, 1f) < forkProbability )
+            {
+                Vector2 fork = point + point.normalized * Random.Range(minForkDistance, maxForkDistance);
+
+                controlPoints.Add(fork);
+                controlPoints.Add(point);
+            }
+
         }
         
     }
@@ -168,22 +182,50 @@ public class LevelGenerator : GLSupplier
             
             Vector2 averageDirection = (lastDirection - direction.normalized).normalized;
 
-            if (Vector2.Dot(averageDirection, normal) < 0) //convex check
+            if(Vector2.Dot(direction, lastDirection) < -0.8f)
+                averageDirection = lastDirection;
+            else if (Vector2.Dot(averageDirection, normal) < 0) //convex check
                 averageDirection = -averageDirection;
 
-            Debug.DrawLine(controlPoints[i].ToVec3(), controlPoints[i].ToVec3() + averageDirection.ToVec3(), Color.green, 10f);
+            Vector2 offset = averageDirection * Random.RandomRange(minOutlineOffset, maxOutlineOffset);
+            float offsetMagnitude = offset.magnitude;
+            Vector2 newPoint = controlPoints[i] + offset;
+            bool canPlace = true;
 
-            outline.Add(controlPoints[i] + averageDirection * Random.RandomRange(minOutlineOffset, maxOutlineOffset));
+            foreach (Vector2 outlinePoint in outline)
+            {
+                if ((newPoint - outlinePoint).magnitude < offsetMagnitude)
+                {
+                    canPlace = false;
+                    break;
+                }
+            }
 
-            Debug.DrawLine(controlPoints[i].ToVec3(), controlPoints[i].ToVec3() + normal.ToVec3(), Color.cyan, 10f);
+            if (canPlace)             
+                outline.Add(newPoint);
 
+            
             for (float s = outlineSubdivisions; s < direction.magnitude; s += outlineSubdivisions)
             {
                 Vector2 point = controlPoints[i] + direction.normalized * s;
 
-                Vector2 offset =  normal * Random.Range(minOutlineOffset, maxOutlineOffset);
+                offset =  normal * Random.Range(minOutlineOffset, maxOutlineOffset);
+                offsetMagnitude = offset.magnitude;
+                newPoint = point + offset;
 
-                outline.Add(point + offset);
+                canPlace = true;
+
+                foreach(Vector2 outlinePoint in outline)
+                {
+                    if ((newPoint - outlinePoint).magnitude < offsetMagnitude)
+                    {
+                        canPlace = false;
+                        break;
+                    }
+                }
+                
+                if(canPlace)
+                    outline.Add(point + offset);
             }
 
             lastDirection = direction.normalized;
@@ -198,7 +240,8 @@ public class LevelGenerator : GLSupplier
 
     void GenerateEnemies()
     {
-        
+        float enemySpawnProbability = enemySpawnChance.Evaluate(GameManager.instance.completedCaves);
+
         for(int i = 0 ; i < outline.Count - 2 ; i++)
         {
             if (Random.Range(0, 1f) > enemySpawnProbability)
@@ -207,13 +250,15 @@ public class LevelGenerator : GLSupplier
             Vector2 startPoint = outline[i];
             Vector2 endPoint = outline[i + 1];
 
+            Vector2 direction = (endPoint - startPoint);
+
+            Vector2 spawnPoint = startPoint + direction * Random.Range(0, 0.5f);
+            
+            Vector2 toPlayer = new Vector2(player.transform.position.x, player.transform.position.y) - spawnPoint;
+
             //player always starts at origo so make sure enemies are further back
-            if(startPoint.magnitude > minSpawnDistanceToPlayer && endPoint.magnitude > minSpawnDistanceToPlayer)
+            if (toPlayer.magnitude > minSpawnDistanceToPlayer )
             {
-                Vector2 direction = (endPoint - startPoint);
-
-                Vector2 spawnPoint = startPoint + direction * Random.Range(0, 0.5f);
-
                 Instantiate(basicEnemyPrefab, new Vector3(spawnPoint.x, spawnPoint.y, 0), Quaternion.identity);
             }
 
