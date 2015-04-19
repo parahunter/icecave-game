@@ -1969,6 +1969,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 287732947}
   gameManager: {fileID: 2038151943}
+  playerDeath: {fileID: 401040, guid: e7b87a36e4b69234383c26b090366a36, type: 2}
 --- !u!1 &685002654
 GameObject:
   m_ObjectHideFlags: 0
@@ -3263,7 +3264,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 175d41128f073054caf8982cbf99b530, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waitTime: 1
+  waitTime: 1.5
   player: {fileID: 538024425}
   levelGenerator: {fileID: 1060810550}
   completedCaves: 0
