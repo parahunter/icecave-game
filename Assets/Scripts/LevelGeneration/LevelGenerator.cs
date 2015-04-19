@@ -34,8 +34,8 @@ public class LevelGenerator : GLSupplier
 
     public float enemySpawnProbability = 0.4f;
 
-    List<Vector2> placementPoints = new List<Vector2>();
-
+    List<Vector2> usedControlPoints = new List<Vector2>();
+    
     public AnimationCurve forkChance;
 
     void Awake()
@@ -50,29 +50,69 @@ public class LevelGenerator : GLSupplier
         edgeCollider.points = colliderPoints.ToArray();
         goal.transform.position = controlPoints[controlPoints.Count - 1];
 
-        List<Vector2> placedObjects = new List<Vector2>();
-        
-        player.transform.position = controlPoints[0].ToVec3();
-        placedObjects.Add(controlPoints[0]);
-
-        
-
+        PlaceStuff();
 
         GenerateEnemies();
     }
+    
+    void PlaceStuff()
+    {
+        player.transform.position = GetNextPlacementPoint().ToVec3();
 
-    Vector2 centerOfMass(List<Vector2> list)
+        goal.transform.position = GetNextPlacementPoint().ToVec3();
+        
+        foreach(Lock l in locks)
+        {
+            l.transform.position = GetNextPlacementPoint().ToVec3();
+        }
+
+    }
+
+    Vector2 GetNextPlacementPoint()
+    {
+        Vector2 centerOfMass = CenterOfMass();
+
+        Vector2 point = ControlPointFarthestAway(centerOfMass);
+        usedControlPoints.Add(point);
+
+        return point;
+    }
+
+    Vector2 CenterOfMass()
     {
         Vector2 center = new Vector2();
 
-        foreach (Vector2 vec in list)
+        foreach (Vector2 vec in usedControlPoints)
             center += vec;
 
-        center /= list.Count;
+        if(usedControlPoints.Count > 0) 
+           center /= usedControlPoints.Count;
 
         return center;
     }
-	
+
+    Vector2 ControlPointFarthestAway(Vector2 point)
+    {
+        float highestDistance = Mathf.NegativeInfinity;
+        Vector2 furthestAway = new Vector2();
+
+        foreach(Vector2 controlPoint in controlPoints)
+        {
+            if (usedControlPoints.Contains(controlPoint))
+                continue;
+
+            Vector2 vec = point - controlPoint;
+            float magnitude = vec.magnitude;
+            if(magnitude > highestDistance)
+            {
+                highestDistance = magnitude;
+                furthestAway = controlPoint;
+            }
+        }
+
+        return furthestAway;
+    }
+
     void OnDrawGizmos()
     {
         //control points
@@ -112,11 +152,9 @@ public class LevelGenerator : GLSupplier
 
             Vector2 offset = new Vector2(Mathf.Cos(directionRadians), Mathf.Sin(directionRadians)) * Random.Range(minControlPointDistance, maxControlPointDistance);
 
-            placementPoints.Add(offset);
             controlPoints.Add(offset);
         }
         
-
     }
 
     void GenerateOutline()

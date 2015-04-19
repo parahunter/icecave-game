@@ -1542,6 +1542,12 @@ ParticleSystem:
     subEmitterCollision1: {fileID: 0}
     subEmitterDeath: {fileID: 0}
     subEmitterDeath1: {fileID: 0}
+--- !u!114 &353359413 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11499816, guid: 3f1782fef577e4a489b411c94f501b4f,
+    type: 2}
+  m_PrefabInternal: {fileID: 891535166}
+  m_Script: {fileID: 11500000, guid: 8b88bec9ef892ee48adc085afdddf486, type: 3}
 --- !u!1 &462038992
 GameObject:
   m_ObjectHideFlags: 0
@@ -2321,15 +2327,20 @@ MonoBehaviour:
   outline: []
   outline3D: []
   basicEnemyPrefab: {fileID: 482384, guid: 32773916da604c74fbcec404770eea54, type: 2}
-  minForks: 3
-  maxForks: 6
-  minControlPointDistance: 20
-  maxControlPointDistance: 25
-  outlineSubdivisions: 7
-  minOutlineOffset: 3
-  maxOutlineOffset: 5
+  minForks: 5
+  maxForks: 7
+  minControlPointDistance: 10
+  maxControlPointDistance: 15
+  outlineSubdivisions: 3
+  minOutlineOffset: 6
+  maxOutlineOffset: 10
   edgeCollider: {fileID: 1060810552}
   goal: {fileID: 1752283950}
+  locks:
+  - {fileID: 353359413}
+  - {fileID: 1281229179}
+  - {fileID: 1650624013}
+  player: {fileID: 538024429}
   minSpawnDistanceToPlayer: 12
   enemySpawnProbability: .0500000007
   forkChance:
@@ -2765,6 +2776,12 @@ Transform:
   m_Children: []
   m_Father: {fileID: 538024425}
   m_RootOrder: 7
+--- !u!114 &1281229179 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11499816, guid: 3f1782fef577e4a489b411c94f501b4f,
+    type: 2}
+  m_PrefabInternal: {fileID: 4405906}
+  m_Script: {fileID: 11500000, guid: 8b88bec9ef892ee48adc085afdddf486, type: 3}
 --- !u!1 &1311552377
 GameObject:
   m_ObjectHideFlags: 0
@@ -2982,6 +2999,12 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+--- !u!114 &1650624013 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11499816, guid: 3f1782fef577e4a489b411c94f501b4f,
+    type: 2}
+  m_PrefabInternal: {fileID: 1464358470}
+  m_Script: {fileID: 11500000, guid: 8b88bec9ef892ee48adc085afdddf486, type: 3}
 --- !u!1 &1683399285
 GameObject:
   m_ObjectHideFlags: 0
