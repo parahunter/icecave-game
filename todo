@@ -5,21 +5,23 @@ Done
 	Enemies
 	Dying
 	Level flow
+	colored lasers
 
 Need
+	gameplay change
+	better controls
+	
 	Tutorial
 	Credits
-
 Want
 	Art
-		colored lasers
+
+	SFX
+
 	Music
 	multiple levels
 
-	960 600
-
-	Rankings
-		
+	Rankings	
 		Lazer Chicken;
 		Lazer Pointer
 		Lazer Scalpel
@@ -29,7 +31,6 @@ Want
 N2H
 	delaunay triangulation
 
-	better laser rendering
 	Disco ball
 	80s effects
 	different layouts

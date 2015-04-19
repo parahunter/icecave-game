@@ -13,14 +13,12 @@ public class LevelGenerator : GLSupplier
 
     public Transform basicEnemyPrefab;
 
-    public int minControlPoints = 4;
-    public int maxControlPoints = 7;
+    public int minForks = 4;
+    public int maxForks = 7;
 
-    public float minHorizontalSeparation = -4f;
-    public float maxHorizontalSeparation = 4f;
+    public float minControlPointDistance = 10;
+    public float maxControlPointDistance = 10;
 
-    public float minVerticalSeparation = -2f;
-    public float maxVerticalSeparation = 2f;
 
     public float outlineSubdivisions = 1.5f;
     public float minOutlineOffset = 2f;
@@ -33,6 +31,10 @@ public class LevelGenerator : GLSupplier
     public float minSpawnDistanceToPlayer = 12f;
 
     public float enemySpawnProbability = 0.4f;
+
+    List<Vector2> placementPoints = new List<Vector2>();
+
+    public AnimationCurve forkChance;
 
     void Awake()
     {
@@ -76,62 +78,62 @@ public class LevelGenerator : GLSupplier
 
     void GenerateControlPoints()
     {
-        int controlPointsCount = Random.Range(minControlPoints, maxControlPoints);
+        int forkCount = Random.Range(minForks, maxForks);
 
-        controlPoints.Add(Vector2.zero);
-
-        for(int i = 1 ; i < controlPointsCount ; i++)
+        for(int f = 0 ; f < forkCount ; f++)
         {
-            Vector2 old = controlPoints[i - 1];
+            float directionOffset = 0;// Random.Range(0, Mathf.PI);
 
-            Vector2 offset = new Vector2(Random.Range(minHorizontalSeparation, maxHorizontalSeparation), Random.Range(minVerticalSeparation, maxVerticalSeparation));
+            float t = (float)f / forkCount;
 
-            controlPoints.Add(old + offset);
+            float directionRadians = t * Mathf.PI * 2 + directionOffset;
+
+            Vector2 offset = new Vector2(Mathf.Cos(directionRadians), Mathf.Sin(directionRadians)) * Random.Range(minControlPointDistance, maxControlPointDistance);
+
+            placementPoints.Add(offset);
+            controlPoints.Add(offset);
         }
+        
+
     }
 
     void GenerateOutline()
     {
-        //left
-        outline.Add(controlPoints[0] - Vector2.right * Random.Range(minOutlineOffset, maxOutlineOffset));
 
-        //lower part
-        for (int i = 0; i < controlPoints.Count - 1; i++)
+        Vector2 lastDirection = (controlPoints[0] - controlPoints[controlPoints.Count - 1]).normalized;
+        for (int i = 0; i < controlPoints.Count; i++ )
         {
-            Vector2 direction = controlPoints[i + 1] - controlPoints[i];
+            Vector2 direction = (controlPoints[(i + 1) % controlPoints.Count] - controlPoints[i]);
+            Vector2 normal = new Vector2(direction.normalized.y, -direction.normalized.x);
             
-            for (float s = 0; s < direction.magnitude ; s += outlineSubdivisions)
+            Vector2 averageDirection = (lastDirection - direction.normalized).normalized;
+
+            if (Vector2.Dot(averageDirection, normal) < 0) //convex check
+                averageDirection = -averageDirection;
+
+            Debug.DrawLine(controlPoints[i].ToVec3(), controlPoints[i].ToVec3() + averageDirection.ToVec3(), Color.green, 10f);
+
+            outline.Add(controlPoints[i] + averageDirection * Random.RandomRange(minOutlineOffset, maxOutlineOffset));
+
+            Debug.DrawLine(controlPoints[i].ToVec3(), controlPoints[i].ToVec3() + normal.ToVec3(), Color.cyan, 10f);
+
+            for (float s = outlineSubdivisions; s < direction.magnitude; s += outlineSubdivisions)
             {
                 Vector2 point = controlPoints[i] + direction.normalized * s;
 
-                Vector2 offset = -Vector2.up * Random.Range(minOutlineOffset, maxOutlineOffset);
+                Vector2 offset =  normal * Random.Range(minOutlineOffset, maxOutlineOffset);
 
                 outline.Add(point + offset);
             }
+
+            lastDirection = direction.normalized;
         }
 
-        //right
-        outline.Add(controlPoints[controlPoints.Count - 1] + Vector2.right * Random.Range(minOutlineOffset, maxOutlineOffset));
-
-        //top
-        for (int i = controlPoints.Count - 1; i > 0 ; i--)
+        foreach(Vector2 vec in outline)
         {
-            Vector2 direction = controlPoints[i - 1] - controlPoints[i];
-
-            for (float s = 0; s < direction.magnitude; s += outlineSubdivisions)
-            {
-                Vector2 point = controlPoints[i] + direction.normalized * s;
-
-                Vector2 offset = Vector2.up * Random.Range(minOutlineOffset, maxOutlineOffset);
-
-                outline.Add(point + offset);
-            }
+            outline3D.Add(vec.ToVec3());
         }
- 
-        foreach(Vector2 point in outline)
-        {
-            outline3D.Add(new Vector3(point.x, point.y, 0));
-        }
+
     }
 
     void GenerateEnemies()

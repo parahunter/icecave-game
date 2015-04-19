@@ -13,6 +13,10 @@ public class GameManager : MonoBehaviour
 
     public static GameManager instance;
 
+    public int lockCount = 0;
+    public int lockAmount = 3;
+    public Goal goal;
+
     void Awake()
     {
         instance = this;
@@ -65,6 +69,17 @@ public class GameManager : MonoBehaviour
     {
         StartCoroutine(waitThenReload());
     }
+
+    public void IncreaseLockCount()
+    {
+        lockCount++;
+
+        if(lockCount == lockAmount)
+        {
+            goal.Open();
+        }
+    }
+
 
 
     IEnumerator waitThenReload()
