@@ -14,6 +14,18 @@ public class PlayerMovement : MonoBehaviour
         body = GetComponent<Rigidbody2D>();
     }
 
+    bool pause = false;
+
+    //void Update()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.Space))
+    //        pause = !pause;
+
+    //    if (pause)
+    //        Time.timeScale = 0;
+    //    else
+    //        Time.timeScale = 1;
+    //}
 	
 	// Update is called once per frame
 	void FixedUpdate () 
