@@ -6,6 +6,10 @@ using System.Collections.Generic;
 public class GameOverScreen : MonoBehaviour 
 {
     public Text score;
+    public Text rankingText;
+
+    public int[] rankingScores;
+    public string[] rankings;
 
 	// Use this for initialization
 	void Start () 
@@ -15,7 +19,17 @@ public class GameOverScreen : MonoBehaviour
         if(obj != null)
         {
             GameOverMessage message = obj.GetComponent<GameOverMessage>();
-             score.text = message.completedCaves.ToString();
+            score.text = message.completedCaves.ToString();
+
+            string ranking = "";
+
+            for (int i = 0; i < rankingScores.Length; i++ )
+            {
+                if (rankingScores[i] <= message.completedCaves)
+                    ranking = rankings[i];
+            }
+
+            rankingText.text = ranking;
 
             Destroy(obj);
         }
