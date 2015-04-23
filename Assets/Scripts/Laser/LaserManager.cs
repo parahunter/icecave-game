@@ -30,8 +30,15 @@ public class LaserManager : GLSupplier
 	// Update is called once per frame
 	void FixedUpdate () 
     {
+        List<LaserBeam> beamsToDelete = new List<LaserBeam>();
         foreach(LaserBeam beam in beams)
         {
+            if(beam.segments.Count <= 0)
+            {
+                beamsToDelete.Add(beam);
+                continue;
+            }
+
             bool removeStartSegment = false;
 
 
@@ -125,6 +132,9 @@ public class LaserManager : GLSupplier
             if (removeStartSegment)
                 beam.segments.RemoveAt(0);
         }
+
+        foreach (LaserBeam beam in beamsToDelete)
+            beams.Remove(beam);
 	}
 
     public void AddBeam( Vector3 position, Vector3 direction, LaserSource source)

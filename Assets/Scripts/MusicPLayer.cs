@@ -21,5 +21,12 @@ public class MusicPLayer : MonoBehaviour
         else
             Destroy(gameObject);
 	}
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+            Application.Quit();
+
+    }
 	
 }
